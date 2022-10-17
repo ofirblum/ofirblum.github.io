@@ -15,7 +15,7 @@ const linkClass = 'rounded-md hover:shadow-md dark:hover:shadow-cyan-200 hover:s
 >
   <h2 class="flex justify-start w-full text-2xl tracking-tighter mb-6">Technologies I work with:</h2>
   <!-- Tabs -->
-  <nav class="flex justify-evenly justify-items-center border-solid border-2 border-cyan-500 dark:border-cyan-200">
+  <nav class="grid md:grid-cols-4 grid-cols-2 justify-items-center border-solid border-2 border-cyan-500 dark:border-cyan-200">
     <button @click.prevent="openTab = 1"
         @keyup.right="openTab = 2; $nextTick(() => $refs.secondTab.focus())"
         @keyup.left="openTab = 4; $nextTick(() => $refs.fourthTab.focus())"
