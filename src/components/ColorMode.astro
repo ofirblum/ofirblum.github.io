@@ -1,0 +1,31 @@
+---
+// Silence is _
+---
+
+<script is:inline>
+    function assignCurrentColorModeToRoot() {
+      const root = document.documentElement;
+      const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)');
+      let colorMode = mediaQueryDark.matches ? 'dark' : 'light';
+      mediaQueryDark.addEventListener('change', (event) => {
+        colorMode = event.matches ? 'dark' : 'light';
+        root.setAttribute('data-color-mode', colorMode);
+      });
+      const savedSetting = localStorage.getItem('colorMode');
+      root.setAttribute('data-color-mode', savedSetting || colorMode);
+    }
+    assignCurrentColorModeToRoot();
+  </script>
+  
+  <script>
+    const switches = document.querySelectorAll('[data-color-mode-switch]');
+    const root = document.documentElement;
+    switches.forEach((switchElem) => {
+      switchElem.addEventListener('click', () => {
+        const currentMode = root.getAttribute('data-color-mode');
+        const colorMode = currentMode === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-color-mode', colorMode);
+        localStorage.setItem('colorMode', colorMode);
+      });
+    });
+  </script>

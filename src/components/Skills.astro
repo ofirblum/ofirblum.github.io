@@ -1,0 +1,174 @@
+---
+import { Icon } from 'astro-icon'
+
+const buttonClass = 'flex mr-1 py-4 px-4 font-semibold focus:outline-none hover:text-cyan-500 dark:hover:text-cyan-200 focus:text-cyan-500 dark:focus:text-cyan-200'
+const iconClass = 'h-16 w-16 py-2 px-2'
+const linkClass = 'rounded-md hover:shadow-md dark:hover:shadow-cyan-200 hover:shadow-cyan-500'
+---
+<div class="flex flex-col w-full px-7 md:px-32 mb-10 sm:mb-0 mt-8 py-6"
+  x-data="{ 
+    openTab: 1,
+    activeClasses: 'underline decoration-dashed underline-offset-8'
+    }"
+  x-cloak
+  class="p-6"
+>
+  <h2 class="flex justify-start w-full text-2xl tracking-tighter mb-6">Technologies I work with:</h2>
+  <!-- Tabs -->
+  <nav class="flex justify-evenly justify-items-center border-solid border-2 border-cyan-500 dark:border-cyan-200">
+    <button @click.prevent="openTab = 1"
+        @keyup.right="openTab = 2; $nextTick(() => $refs.secondTab.focus())"
+        @keyup.left="openTab = 4; $nextTick(() => $refs.fourthTab.focus())"
+        x-ref="firstTab"
+        :class="openTab === 1 ? activeClasses : ''"
+        class={buttonClass}
+    >
+        Programming
+    </button>
+    <button @click.prevent="openTab = 2"
+        @keyup.right="openTab = 3; $nextTick(() => $refs.thirdTab.focus())"
+        @keyup.left="openTab = 1; $nextTick(() => $refs.firstTab.focus())"
+        x-ref="secondTab"
+        :class="openTab === 2 ? activeClasses : ''"
+        class={buttonClass}
+    >
+        Querying
+    </button>
+    <button @click.prevent="openTab = 3"
+        @keyup.right="openTab = 4; $nextTick(() => $refs.fourthTab.focus())"
+        @keyup.left="openTab = 2; $nextTick(() => $refs.secondTab.focus())"
+        x-ref="thirdTab"
+        :class="openTab === 3 ? activeClasses : ''"
+        class={buttonClass}
+    >
+        Libraries
+    </button>
+    <button @click.prevent="openTab = 4"
+        @keyup.right="openTab = 1; $nextTick(() => $refs.firstTab.focus())"
+        @keyup.left="openTab = 3; $nextTick(() => $refs.thirdTab.focus())"
+        x-ref="fourthTab"
+        :class="openTab === 4 ? activeClasses : ''"
+        class={buttonClass}
+    >
+        Tools
+    </button>
+  </nav>
+  <div class="py-10">
+    <!-- Programming languages -->
+    <div x-show="openTab === 1" x-transition:enter.duration.500ms
+      class="grid grid-cols-3 justify-items-center w-full"
+    >
+      <a href="https://www.python.org/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="carbon:logo-python" class={iconClass}/>
+      </a>
+      <a href="https://www.r-project.org/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="fa-brands:r-project" class={iconClass}/>
+      </a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="fluent:javascript-20-filled" class={iconClass}/>
+      </a>
+    </div>
+    <!-- Query languages -->
+    <div x-show="openTab === 2" x-transition:enter.duration.500ms
+      class="grid grid-cols-4 justify-items-center space-x-10 w-full"
+      <a href="https://en.wikipedia.org/wiki/SQL" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="carbon:sql" class={iconClass}/>
+      </a>
+      <a href="https://learn.microsoft.com/en-us/dax/" target="_blank"
+        class={linkClass}
+      >
+        <button class="h-16 w-16 py-2 px-2 text-3xl">DAX</button>
+      </a>
+      <a href="https://learn.microsoft.com/en-us/powerquery-m/" target="_blank"
+        class={linkClass}
+      >
+        <button class="h-16 w-16 py-2 px-2 text-3xl">M</button>
+      </a>
+      <a href="https://www.mongodb.com/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:mongodb" class={iconClass}/>
+      </a>
+    </div>
+    <!-- Libraries -->
+    <div x-show="openTab === 3" x-transition:enter.duration.500ms
+      class="grid grid-cols-4 gap-y-6 md:grid-cols-8 justify-items-center w-full"
+    >
+      <a href="https://pandas.pydata.org/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:pandas" class={iconClass}/>
+      </a>
+      <a href="https://numpy.org/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="file-icons:numpy" class={iconClass}/>
+      </a>
+      <a href="https://www.selenium.dev/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:selenium" class={iconClass}/>
+      </a>
+      <a href="https://alpinejs.dev/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:alpinedotjs" class={iconClass}/>
+      </a>
+      <a href="https://astro.build/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:astro" class={iconClass}/>
+      </a>
+      <a href="https://flask.palletsprojects.com/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="cib:flask" class={iconClass}/>
+      </a>
+      <a href="https://streamlit.io/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:streamlit" class={iconClass}/>
+      </a>
+      <a href="https://tailwindcss.com/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:tailwindcss" class={iconClass}/>
+      </a>
+    </div>
+    <div x-show="openTab === 4" x-transition:enter.duration.500ms
+      class="grid grid-cols-4 justify-items-center space-x-10 w-full"
+    >
+      <a href="https://code.visualstudio.com/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="akar-icons:vscode-fill" class={iconClass}/>
+      </a>
+      <a href="https://git-scm.com/" target="_blank"
+        class={linkClass}
+      >
+      <Icon name="fontisto:git" class={iconClass}/>
+      </a>
+      <a href="https://www.microsoft.com/en-us/microsoft-365/excel" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="uiw:file-excel" class={iconClass}/>
+      </a>
+      <a href="https://www.netlify.com/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:netlify" class={iconClass}/>
+      </a>
+    </div>
+  </div>
+</div>
+<style>
+  [x-cloak] { display: none !important; }
+</style>

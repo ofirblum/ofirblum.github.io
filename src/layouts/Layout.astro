@@ -1,0 +1,29 @@
+---
+import ColorMode from '../components/ColorMode.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css'
+
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<ColorMode />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/letter-o.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen w-screen font-mono text-slate-900 selection:bg-cyan-700 selection:text-white overflow-x-hidden bg-white dark:bg-slate-900 dark:text-white">
+		<Header />
+		<slot />
+		<!-- <Footer /> -->
+	</body>
+</html>
