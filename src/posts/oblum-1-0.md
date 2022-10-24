@@ -8,7 +8,7 @@ excerpt: Building my personal website using Astro, with Alpine.js and Tailwind C
 For my personal website, I looked for an opinionated Static Site Generator with out-of-the-box support for Tailwind CSS and Alpine.js.  
 The website having minimalistic aesthetics, writing Astro components each containing sprinkled Tailwind classes and Alpine code made sense, as it creates compact and complete components, while keeping a clear and accessible overview of the project.
 
-The complete project is available on [GitBub](https://github.com/ofirblum/personal-website).
+The complete project is available on [GitHub](https://github.com/ofirblum/personal-website).
 All pages are static HTML, and the lone interactive feature is the tabs element on the index page, written with Alpine. Within Astro, Alpine components don't need to be created separately and then hydrated. Rather, one can write Alpine code inside .astro files. For sporadic sprinkling of JS, Alpine with its small size is a neat option with minimal performance hindrance.
 
 ```html
