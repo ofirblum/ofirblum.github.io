@@ -3,7 +3,7 @@ title: Personal website
 slug: oblum-1-0
 excerpt: Building my personal website using Astro, with Alpine.js and Tailwind CSS integrations.
 ---
-# Building my personal website using Astro, Alpine.js and Tailwind CSS
+# Building my personal website using [Astro](https://docs.astro.build/en/core-concepts/astro-components/), [Alpine.js](https://alpinejs.dev/start-here) and [Tailwind CSS](https://tailwindcss.com/docs/installation)
 
 For my personal website, I looked for an opinionated Static Site Generator with out-of-the-box support for Tailwind CSS and Alpine.js.  
 The website having minimalistic aesthetics, writing Astro components each containing sprinkled Tailwind classes and Alpine code made sense, as it creates compact and complete components, while keeping a clear and accessible overview of the project.
@@ -14,6 +14,10 @@ All pages are static HTML, and the lone interactive feature is the tabs element 
 ```html
 ---
 import { Icon } from 'astro-icon'
+
+const buttonClass = 'flex py-4 px-4 font-semibold transition duration-300 hover:text-cyan-500 dark:hover:text-cyan-200 focus:outline-none focus:ring-2 dark:focus:ring-cyan-200 focus:ring-cyan-500 focus:ring-dotted rounded-md theme-btn focus:bg-slate-200 dark:focus:bg-slate-800'
+const iconClass = 'h-16 w-16 py-2 px-2'
+const linkClass = 'rounded-md transition duration-300 hover:shadow-md dark:hover:shadow-cyan-200 hover:shadow-cyan-500'
 ---
 <div class="flex flex-col w-full px-7 md:px-32 mb-10 sm:mb-0 mt-8 py-6"
   x-data="{ 
@@ -108,3 +112,7 @@ import { Icon } from 'astro-icon'
   [x-cloak] { display: none !important; }
 </style>
 ```
+
+The first div element contains the **x-data** directive, which defines the element as an Alpine component. The first tab is defined as default, and some Tailwind classes are declared for the active tab.  
+Click events change the openTab index, and key events combined with the **x-ref** directive take care of keyboard functionality. The **x-bind** directive, shortened to **:class**, applies the activeClasses on the button when its index is active.
+Using the **x-show** directive, the respective icons appear according to the selected openTab index.

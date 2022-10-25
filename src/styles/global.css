@@ -29,6 +29,7 @@
   counter-increment: step 0;
   width: 100%;
   border-radius: 0.375rem;
+  margin-bottom: 2em;
 }
 
 @media only screen and (min-width: 768px) {
