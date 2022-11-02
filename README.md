@@ -1,1 +1,1 @@
-# Welcome to my personal website built with Astro + Twilwind + Alpine
+# Welcome to my personal website built with Astro + Tailwind + Alpine

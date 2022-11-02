@@ -144,7 +144,7 @@ const linkClass = 'rounded-md transition duration-300 hover:shadow-md dark:hover
       </a>
     </div>
     <div x-show="openTab === 4" x-transition:enter.duration.500ms
-      class="grid grid-cols-4 justify-items-center space-x-10 w-full"
+      class="grid grid-cols-4 gap-y-6 md:grid-cols-6 justify-items-center w-full"
     >
       <a href="https://code.visualstudio.com/" target="_blank"
         class={linkClass}
@@ -165,6 +165,16 @@ const linkClass = 'rounded-md transition duration-300 hover:shadow-md dark:hover
         class={linkClass}
       >
         <Icon name="simple-icons:netlify" class={iconClass}/>
+      </a>
+      <a href="https://airflow.apache.org/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="cib:apache-airflow" class={iconClass}/>
+      </a>
+      <a href="https://spark.apache.org/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="cib:apache-spark" class={iconClass}/>
       </a>
     </div>
   </div>
