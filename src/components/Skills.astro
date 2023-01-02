@@ -149,7 +149,7 @@ const linkClass = 'rounded-md transition duration-300 hover:shadow-md dark:hover
       </a>
     </div>
     <div x-show="openTab === 4" x-transition:enter.duration.500ms
-      class="grid grid-cols-4 gap-y-6 md:grid-cols-9 justify-items-center w-full"
+      class="grid grid-cols-4 gap-y-6 md:grid-cols-8 justify-items-center w-full"
     >
       <a href="https://code.visualstudio.com/" target="_blank"
         class={linkClass}
@@ -195,6 +195,16 @@ const linkClass = 'rounded-md transition duration-300 hover:shadow-md dark:hover
         class={linkClass}
       >
         <Icon name="simple-icons:databricks" class={iconClass}/>
+      </a>
+      <a href="https://www.terraform.io/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="mdi:terraform" class={iconClass}/>
+      </a>
+      <a href="https://www.jenkins.io/" target="_blank"
+        class={linkClass}
+      >
+        <Icon name="simple-icons:jenkins" class={iconClass}/>
       </a>
     </div>
   </div>
