@@ -3,7 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import alpinejs from "@astrojs/alpinejs";
 
 export default defineConfig({
-  site: 'http://oblum.be',
+  site: 'https://ofirblum.github.io',
   markdown: {
     shikiConfig: {
       theme: 'solarized-light',
