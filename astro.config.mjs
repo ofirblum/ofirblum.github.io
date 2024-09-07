@@ -4,7 +4,6 @@ import alpinejs from "@astrojs/alpinejs";
 
 export default defineConfig({
   site: 'https://ofirblum.github.io',
-  base: 'personal-website',
   markdown: {
     shikiConfig: {
       theme: 'solarized-light',
