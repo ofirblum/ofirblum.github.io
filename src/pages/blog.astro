@@ -7,7 +7,7 @@ const posts = await Astro.glob('../posts/*.md');
 
     <div class="w-full px-7 md:px-44 mb-10 sm:mb-0 mt-10 py-4">
         {posts.map(post => (
-            <a href={`/${post.frontmatter.slug}`}>
+            <a href={`/personal-website/${post.frontmatter.slug}`}>
                 <div class="border-solid transition duration-300 hover:border-dashed dark:hover:bg-slate-800 hover:bg-slate-100 border-2 border-cyan-500 dark:border-cyan-200 px-4 py-4 mb-6">
                     <h3 class="text-2xl">{post.frontmatter.title}</h3>
                     <p>{post.frontmatter.excerpt}</p>  
