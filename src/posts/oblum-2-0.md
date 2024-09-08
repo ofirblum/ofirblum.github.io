@@ -10,6 +10,7 @@ Whether you are snapshotting your source data (recommended), or any model furthe
 
 Now that you are tracking history of columns that are not used anywhere downstream, you may end up with duplicates.
 Imagine you are snapshotting an employee table, and Alice's history looks like this:
+<br><br>
 
 | ID | Name  | Function  | Children | Valid From | Valid To  |
 |:--:|:-----:|:---------:|:--------:|:----------:|:---------:|
@@ -17,8 +18,7 @@ Imagine you are snapshotting an employee table, and Alice's history looks like t
 |1   | Alice | Architect |    1     | 2022-05-31 | 2023-09-14|
 |1   | Alice | Architect |    2     | 2023-09-14 | 9999-01-31|
 
-<br>
-In one a model downstream from it, you are no longer interested in the number of children. Selecting only Name and Function, you would end up with: <br>
+<br>In one a model downstream from it, you are no longer interested in the number of children. Selecting only Name and Function, you would end up with:<br><br>
 
 | ID | Name  | Function  | Valid From | Valid To   |
 |:--:|:-----:|:---------:|:----------:|:----------:|
@@ -26,18 +26,16 @@ In one a model downstream from it, you are no longer interested in the number of
 |1   | Alice | Architect | 2022-05-31 | 2023-09-14 |
 |1   | Alice | Architect | 2023-09-14 | 9999-01-31 |
 
-<br>
-Alice was promoted to Architect on 2022-05-31, but since she gave birth to a second child on 2023-09-14, you now have a duplicate record.
+<br>Alice was promoted to Architect on 2022-05-31, but since she gave birth to a second child on 2023-09-14, you now have a duplicate record.
 
-Ideally, you would want to compress this result in order to produce:
+Ideally, you would want to compress this result in order to produce:<br><br>
 
 | ID | Name  | Function  | Valid From | Valid To   |
 |:--:|:-----:|:---------:|:----------:|:----------:|
 |1   | Alice | Engineer  | 2022-01-01 | 2022-05-31 |
 |1   | Alice | Architect | 2022-05-31 | 9999-01-31 |
 
-<br>
-Given a CTE (a source table), the source table's ID column, and the subset of columns you would like to retain (Name and Function in this case), the following macro will do just that, by first creating "compression groups" and using them to compress the timestamps.<br>
+<br>Given a CTE (a source table), the source table's ID column, and the subset of columns you would like to retain (Name and Function in this case), the following macro will do just that, by first creating "compression groups" and using them to compress the timestamps.<br><br>
 
 | ID | Name  | Function  | Valid From | Valid To   | Compression Group |
 |:--:|:-----:|:---------:|:----------:|:----------:|:-----------------:|
@@ -45,8 +43,7 @@ Given a CTE (a source table), the source table's ID column, and the subset of co
 |1   | Alice | Architect | 2022-05-31 | 2023-09-14 |1                  |
 |1   | Alice | Architect | 2023-09-14 | 9999-01-31 |1                  |
 
-<br>
-You may think that grouping by the ID, Name and Function should be enough, and in the above example it also would be enough, but what if Alice wanted to be an engineer again? The timestamps would be wrong without a compression group.
+<br>You may think that grouping by the ID, Name and Function should be enough, and in the above example it also would be enough, but what if Alice wanted to be an engineer again? The timestamps would be wrong without a compression group.
 
 The code is also available on [Github](https://github.com/ofirblum/dbt-macros/blob/main/compress_snapshot.sql)
 
