@@ -42,6 +42,8 @@ Given a CTE (a source table), the source table's ID column, and the subset of co
 
 You may think that grouping by the ID, Name and Function should be enough, and in the above example it also would be enough, but what if Alice wanted to be an engineer again? The timestamps would be wrong without a compression group.
 
+The code is also available on [Github](https://github.com/ofirblum/dbt-macros/blob/main/compress_snapshot.sql)
+
 ```sql
 {% macro compress_snapshot(cte, id_col, subset_cols) %}
 /*
