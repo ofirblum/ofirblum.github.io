@@ -3,6 +3,7 @@ title: Compressing snapshots in dbt
 slug: oblum-2-0
 excerpt: Strategy and macro for compressing snapshot timestamps in dbt
 ---
+
 # Compressing [snapshot](https://docs.getdbt.com/docs/build/snapshots) timestamps in [dbt](https://docs.getdbt.com/docs/build/documentation)
 
 Whether you are snapshotting your source data (recommended), or any model further downstream, a best practice (as recommended by dbt labs) is to track the history of the entire source table ( select * ). The risk of not doing that, is that once you exclude a column, its history is not tracked and cannot be built retrospectively, while someone may be interested in it in the future.
@@ -27,6 +28,7 @@ In one a model downstream from it, you are no longer interested in the number of
 Alice was promoted to Architect on 2022-05-31, but since she gave birth to a second child on 2023-09-14, you now have a duplicate record.
 
 Ideally, you would want to compress this result in order to produce:
+
 | ID | Name  | Function  | Valid From | Valid To   |
 |:--:|:-----:|:---------:|:----------:|:----------:|
 |1   | Alice | Engineer  | 2022-01-01 | 2022-05-31 |
