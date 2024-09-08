@@ -11,8 +11,7 @@ Now that you are tracking history of columns that are not used anywhere downstre
 Imagine you are snapshotting an employee table, and Alice's history looks like this:
 
 |ID| Name  | Function  | Children | Valid From | Valid To  |
-|--|-------|-----------|----------|------------|-----------|
-|1 | Alice | Engineer  |    1     | 2022-01-01 | 2022-05-31|
+|--|-------|-----------|----------|------------|-----------| |1 | Alice | Engineer  |    1     | 2022-01-01 | 2022-05-31|
 |1 | Alice | Architect |    1     | 2022-05-31 | 2023-09-14|
 |1 | Alice | Architect |    2     | 2023-09-14 | 9999-01-31|
 
