@@ -8,7 +8,7 @@ excerpt: Strategy and macro for compressing snapshot timestamps in dbt
 
 Whether you are snapshotting your source data (recommended), or any model further downstream, a best practice (as recommended by dbt labs) is to track the history of the entire source table ( select * ). The risk of not doing that, is that once you exclude a column, its history is not tracked and cannot be built retrospectively, while someone may be interested in it in the future.
 
-Now that you are tracking history of columns that are not used anywhere downstream, you may end up with duplicates.
+If you follow this practice, inevitably at some point you would be tracking history of columns that are not used anywhere downstream, and that creates duplicates.
 Imagine you are snapshotting an employee table, and Alice's history looks like this:
 <br>
 
@@ -18,7 +18,7 @@ Imagine you are snapshotting an employee table, and Alice's history looks like t
 |1   | Alice | Architect |    1     | 2022-05-31 | 2023-09-14|
 |1   | Alice | Architect |    2     | 2023-09-14 | 9999-01-31|
 
-<br>In one a model downstream from it, you are no longer interested in the number of children. Selecting only Name and Function, you would end up with:<br>
+<br>In a model downstream from it, you are no longer interested in the number of children. Selecting only Name and Function, you would end up with:<br>
 
 | ID | Name  | Function  | Valid From | Valid To   |
 |:--:|:-----:|:---------:|:----------:|:----------:|
