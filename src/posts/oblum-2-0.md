@@ -1,4 +1,3 @@
-
 ---
 title: Compressing snapshots in dbt
 slug: oblum-2-0
