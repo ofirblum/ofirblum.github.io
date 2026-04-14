@@ -1,9 +1,8 @@
 ---
-
 title: Transforming CDC into Type 2 Slowly Changing Dimensions in dbt
 slug: cdc-to-type2-scd
 excerpt: Why and how to convert Change Data Capture (CDC) data into Type 2 Slowly Changing Dimensions (SCD) using dbt.
-----------------------------------------------------------------------------------------------------------------------
+---
 
 # Transforming [Change Data Capture (CDC)](https://en.wikipedia.org/wiki/Change_data_capture) into Type 2 SCD in [dbt](https://docs.getdbt.com/)
 
@@ -23,7 +22,7 @@ CDC data is typically event-based rather than state-based. Consider a simple exa
 |  1  | Alice | U             | 2       | 2022-06-01     |
 |  1  | Alice | D             | 3       | 2023-01-01     |
 
-<br>While this shows that Alice was inserted, updated, and later deleted, it doesn’t define her **validity periods** in a way that can be queried historically.
+While this shows that Alice was inserted, updated, and later deleted, it doesn’t define her **validity periods** in a way that can be queried historically.
 By transforming this stream into a Type 2 SCD, we gain:
 
 * **Historical tracking** — each change defines a valid time range (`row_valid_from` → `row_valid_to`)
@@ -32,8 +31,8 @@ By transforming this stream into a Type 2 SCD, we gain:
 * **Analytical clarity** — redundant or empty CDC delete events are excluded, since they hold no business content
 
 ---
-<br>
-This dbt macro converts CDC-formatted data into a Type 2 SCD table. It handles incremental loading, validity periods, and active flagging automatically.<br>
+
+This dbt macro converts CDC-formatted data into a Type 2 SCD table. It handles incremental loading, validity periods, and active flagging automatically.
 
 ```sql
 {% macro sdp_cdc_to_type2(
@@ -100,7 +99,6 @@ final as (
 select * from final
 {% endmacro %}
 ```
-
 ---
 
 ## How it works
@@ -130,6 +128,7 @@ select * from final
 After Alice’s deletion event, the final record simply ends at `2023-01-01`, and no delete row is kept — reflecting that she was removed but without introducing an empty record.
 
 Now you can easily query her historical state:
+
 ```sql
 select *
 from {{ ref('dim_person') }}

@@ -13,7 +13,7 @@ All pages are static HTML, and the lone interactive feature is the tabs element 
 
 ```html
 ---
-import { Icon } from 'astro-icon'
+import { Icon } from 'astro-icon/components'
 
 const buttonClass = 'flex py-4 px-4 font-semibold transition duration-300 hover:text-cyan-500 dark:hover:text-cyan-200 focus:outline-none focus:ring-2 dark:focus:ring-cyan-200 focus:ring-cyan-500 focus:ring-dotted rounded-md theme-btn focus:bg-slate-200 dark:focus:bg-slate-800'
 const iconClass = 'h-16 w-16 py-2 px-2'
