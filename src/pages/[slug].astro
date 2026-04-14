@@ -1,9 +1,23 @@
 ---
+import type { GetStaticPaths, MarkdownInstance } from 'astro';
 import Layout from '../layouts/Layout.astro';
 
-export async function getStaticPaths() {
-  const posts = await Astro.glob('../posts/*.md');
-  return posts.map(post => ({
+type PostFrontmatter = {
+  title: string;
+  slug: string;
+  excerpt: string;
+};
+
+type PostModule = {
+  frontmatter: PostFrontmatter;
+  Content: MarkdownInstance<PostFrontmatter>['Content'];
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = Object.values(
+    import.meta.glob<PostModule>('../posts/*.md', { eager: true })
+  );
+  return posts.map((post) => ({
     params: {
       slug: post.frontmatter.slug
     },
@@ -11,8 +25,9 @@ export async function getStaticPaths() {
       post
     }
   }));
-}
-const { Content, frontmatter } = Astro.props.post;
+};
+
+const { Content, frontmatter } = Astro.props.post as PostModule;
 ---
 
 <Layout title={frontmatter.title}>
@@ -22,16 +37,59 @@ const { Content, frontmatter } = Astro.props.post;
 </Layout>
 
 <style is:global>
+  .blog-content {
+    @apply leading-7;
+  }
   .blog-content h1 {
     @apply text-xl font-bold sm:text-3xl mb-8;
   }
+  .blog-content h2 {
+    @apply text-lg font-bold sm:text-2xl mt-12 mb-6;
+  }
+  .blog-content h3 {
+    @apply text-base font-bold sm:text-xl mt-10 mb-4;
+  }
   .blog-content .astro-code {
-    @apply self-center;
+    @apply mt-4 self-center;
   }
   .blog-content a {
     @apply font-bold underline underline-offset-4 decoration-dotted transition duration-300 hover:text-cyan-500 dark:hover:text-cyan-200;
   }
   .blog-content p {
-    @apply mb-8
+    @apply mb-8;
+  }
+  .blog-content ul {
+    @apply mb-8 list-disc pl-6 space-y-3;
+  }
+  .blog-content ol {
+    @apply mb-8 list-decimal pl-6 space-y-3;
+  }
+  .blog-content li {
+    @apply pl-1;
+  }
+  .blog-content hr {
+    @apply my-10 border-slate-300 dark:border-slate-700;
+  }
+  .blog-content strong {
+    @apply font-bold;
+  }
+  .blog-content code:not(.astro-code code) {
+    @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-slate-800;
+  }
+  .blog-content blockquote {
+    @apply mb-8 border-l-4 border-cyan-500 pl-4 italic text-slate-700 dark:border-cyan-200 dark:text-slate-300;
+  }
+  .blog-content table {
+    @apply mb-8 block w-full overflow-x-auto border-collapse text-left text-sm sm:text-base;
+  }
+  .blog-content thead {
+    @apply border-b-2 border-cyan-500 dark:border-cyan-200;
+  }
+  .blog-content tbody tr {
+    @apply border-b border-slate-200 dark:border-slate-700;
+  }
+  .blog-content th,
+  .blog-content td {
+    @apply px-3 py-2 align-top;
   }
 </style>

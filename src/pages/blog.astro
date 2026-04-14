@@ -1,7 +1,21 @@
 ---
+import type { MarkdownInstance } from 'astro';
 import Layout from '../layouts/Layout.astro';
 
-const posts = await Astro.glob('../posts/*.md');
+type PostFrontmatter = {
+    title: string;
+    slug: string;
+    excerpt: string;
+};
+
+type PostModule = {
+    frontmatter: PostFrontmatter;
+    Content: MarkdownInstance<PostFrontmatter>['Content'];
+};
+
+const posts = Object.values(
+    import.meta.glob<PostModule>('../posts/*.md', { eager: true })
+);
 ---
 <Layout title="Blog | Ofir Blum">
 
